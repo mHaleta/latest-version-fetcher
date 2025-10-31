@@ -44,23 +44,28 @@ class ChangeDirectory:
 
 
 async def block_ads(route, request):
-    with open("data\\ad_keywords.txt", "r") as f:
-        ad_keywords = f.read().splitlines()
+    # cache keywords to avoid opening file per request
+    if not hasattr(block_ads, "_ad_keywords"):
+        with open("data\\ad_keywords.txt", "r", encoding="utf-8") as f:
+            block_ads._ad_keywords = f.read().splitlines()
 
-    if any(keyword in request.url for keyword in ad_keywords):
-        await route.abort()
-        return
+    ad_keywords = block_ads._ad_keywords
 
-    if request.is_navigation_request():
-        try:
+    try:
+        if any(keyword.lower() in request.url.lower() for keyword in ad_keywords):
+            await route.abort()
+            return
+
+        if request.is_navigation_request():
             frame = request.frame
             if frame and frame.parent_frame is not None:
                 await route.abort()
                 return
-        except:
-            pass
-    
-    await route.continue_()
+
+        await route.continue_()
+    except:
+        # log and continue
+        print("Error in block_ads:", format_exc())
 
 
 async def download_file(key, headless, steps, locate_downloadable, wait, size_threshold):
@@ -71,9 +76,7 @@ async def download_file(key, headless, steps, locate_downloadable, wait, size_th
         try:
             chromium_path = os.path.join(drive_letter, get_chromium_path())
             temp_folder = os.path.join(os.path.dirname(chromium_path), "temp")
-
-            if not os.path.exists(temp_folder):
-                os.mkdir(temp_folder)
+            os.makedirs(temp_folder, exist_ok=True)
             
             os.environ["TMP"] = temp_folder
             os.environ["TEMP"] = temp_folder
@@ -105,6 +108,7 @@ async def download_file(key, headless, steps, locate_downloadable, wait, size_th
             while not os.path.exists(filename_temp_path):
                 elapsed = (datetime.now() - start).seconds
                 if elapsed > wait:
+                    save_task.cancel()
                     raise Exception(f"Downloading was not completed during {wait} seconds. Process stopped.")
                 
                 await asleep(0.5)
@@ -115,15 +119,39 @@ async def download_file(key, headless, steps, locate_downloadable, wait, size_th
             print(f"Download Complete: {download.suggested_filename} ({file_size:.1f} KB)")
 
             if file_size < size_threshold:
-                os.remove(filename_temp_path)
-                filename_temp_path = None
+                try:
+                    os.remove(filename_temp_path)
+                except Exception:
+                    pass
 
+                filename_temp_path = None
                 raise Exception(f"File too small ({file_size:.1f} KB), deleted.")
+        except KeyboardInterrupt:
+            if context:
+                try:
+                    await context.close()
+                except Exception:
+                    pass
+            if chromium:
+                try:
+                    await chromium.close()
+                except Exception:
+                    pass
+            
+            raise
         except:
-            pass
+            print("Download failed:", format_exc())
         finally:
-            await context.close()
-            await chromium.close()
+            if context:
+                try:
+                    await context.close()
+                except Exception:
+                    pass
+            if chromium:
+                try:
+                    await chromium.close()
+                except Exception:
+                    pass
 
             return filename_temp_path
 
@@ -133,7 +161,7 @@ def move(file_path, target_root_folder, mode, key):
         with open("data\\current_basenames.json", "r", encoding="utf-8") as json:
             basenames = load(json)
         
-        current_absname = os.path.join(target_root_folder, basenames[mode].get(key, ""))
+        current_absname = os.path.join(target_root_folder, basenames.get(mode, {}).get(key, ""))
 
         if current_absname != target_root_folder:
             try:
@@ -145,6 +173,8 @@ def move(file_path, target_root_folder, mode, key):
                 pass
             except FileNotFoundError:
                 pass
+            except Exception:
+                print("Error removing current basename:", format_exc())
         
         new_base_destination = os.path.basename(file_path)
         new_abs_destination = os.path.join(target_root_folder, new_base_destination)
@@ -153,19 +183,31 @@ def move(file_path, target_root_folder, mode, key):
             extract_folder = os.path.splitext(new_abs_destination)[0]
             
             if is_zipfile(file_path):
-                with ZipFile(file_path, "r") as zip:
-                    zip.extractall(extract_folder)
-                
-                os.remove(file_path)
+                try:
+                    with ZipFile(file_path, "r") as zipf:
+                        zipf.extractall(extract_folder)
+                    os.remove(file_path)
+                except Exception:
+                    print("Error extracting zip:", format_exc())
+                    return
             else:
                 os.mkdir(extract_folder)
-                shutil_move(file_path, os.path.join(extract_folder, new_base_destination))
+                
+                try:
+                    shutil_move(file_path, os.path.join(extract_folder, new_base_destination))
+                except Exception:
+                    print("Error moving portable:", format_exc())
+                    return
             
             new_base_destination = os.path.basename(extract_folder)
         else:
-            shutil_move(file_path, new_abs_destination)
+            try:
+                shutil_move(file_path, new_abs_destination)
+            except Exception:
+                print("Error moving installer:", format_exc())
+                return
         
-        basenames[mode][key] = new_base_destination
+        basenames.setdefault(mode, {})[key] = new_base_destination
 
         with open("data\\current_basenames.json", "w") as json:
             dump(basenames, json, indent=4, sort_keys=True)

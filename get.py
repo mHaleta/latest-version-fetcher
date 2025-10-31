@@ -27,19 +27,20 @@ with ChangeDirectory(project_dir):
         else:
             parameters = load(json)["portables"]
 
-    assert not bool(set(args.list or []) - set(parameters.keys()))
 
-    keys = args.list if args.list else parameters.keys()
+    if args.list:
+        missing = set(args.list) - set(parameters.keys())
+
+        if missing:
+            raise ValueError(f"Unknown keys in --list: {missing}")
+        
+        keys = list(args.list)
+    else:
+        keys = [k for k in parameters.keys() if "_alt" not in k and not(args.exclude and k in args.exclude)]
+
 
     for i, key in enumerate(keys):
-        if args.exclude and key in args.exclude:
-            continue
-
-        if "_alt" in key and (not args.list or key not in args.list):
-            continue
-
         description = parameters[key]["description"]
-        
         
         headless = bool(parameters[key].get("headless", 1))
         steps = parameters[key].get("steps", [])
@@ -47,19 +48,23 @@ with ChangeDirectory(project_dir):
         wait = parameters[key]["wait"]
         size_threshold = parameters[key]["size_threshold"]
 
-        if "_alt" in key:
-            key = compile(r"_alt.*").sub(r"", key)
+        base_key = compile(r"_alt.*").sub(r"", key)
 
         print(f"\n{description}")
-        filename_temp_path = async_run(download_file(key, headless, steps, locate_downloadable, wait, size_threshold))
+        filename_temp_path = async_run(download_file(base_key, headless, steps, locate_downloadable, wait, size_threshold))
 
-        drive_letter = os.path.splitdrive(os.getcwd())[0]
-        if args.installers:
-            target_root_folder = os.path.join(drive_letter, "\\Utilities\\Setupers")
+        if not filename_temp_path:
+            print(f"Download failed or file was discarded for {base_key}, skipping move.")
         else:
-            target_root_folder = os.path.join(drive_letter, "\\Utilities\\Portables")
-        
-        move(filename_temp_path, target_root_folder)
+            drive_letter = os.path.splitdrive(os.getcwd())[0]
+            if args.installers:
+                target_root_folder = os.path.join(drive_letter, "\\Utilities\\Setupers")
+                mode = "installers"
+            else:
+                target_root_folder = os.path.join(drive_letter, "\\Utilities\\Portables")
+                mode = "portables"
+            
+            move(filename_temp_path, target_root_folder, mode, base_key)
         
         if i < len(keys) - 1:
             random_sleep()
