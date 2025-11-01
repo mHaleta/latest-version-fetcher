@@ -1,0 +1,35 @@
+{
+    "installers": {
+        "AMDSoftware": "amd-software-adrenalin-edition-25.9.1-minimalsetup-250901_web.exe",
+        "Avast": "avast_free_antivirus_setup_online.exe",
+        "Chrome": "ChromeSetup.exe",
+        "CloudflareWARP": "Cloudflare_WARP_2025.8.779.0.msi",
+        "Discord": "DiscordSetup.exe",
+        "Docker": "Docker Desktop Installer.exe",
+        "EAApp": "EAappInstaller.exe",
+        "Firefox": "Firefox Installer.exe",
+        "MSTeams": "MSTeamsSetup.exe",
+        "NvidiaApp": "NVIDIA_app_v11.0.5.266.exe",
+        "PotPlayer": "PotPlayerSetup64.exe",
+        "RockstarGamesLauncher": "Rockstar-Games-Launcher.exe",
+        "Steam": "SteamSetup.exe",
+        "Telegram": "tsetup-x64.6.2.4.exe",
+        "TorBrowser": "tor-browser-windows-x86_64-portable-14.5.8.exe",
+        "UbisoftConnect": "UbisoftConnectInstaller.exe",
+        "VSCode": "VSCodeUserSetup-x64-1.105.1.exe",
+        "Viber": "ViberSetup.exe",
+        "WDDashboard": "DashboardSetup.exe",
+        "WinRARen": "winrar-x64-713.exe",
+        "WinRARuk": "winrar-x64-713uk.exe",
+        "Zoom": "ZoomInstallerFull.exe",
+        "qBittorrent": "qbittorrent_5.1.0_x64_setup.exe"
+    },
+    "portables": {
+        "AIDA64Extreme": "aida64extreme800",
+        "AnyDesk": "AnyDesk",
+        "BCU": "BCUninstaller_5.8.3_portable",
+        "CrystalDiskMark": "CrystalDiskMark9_0_1",
+        "Rufus": "rufus-4.11p",
+        "VSCode": "VSCode-win32-x64-1.105.1"
+    }
+}

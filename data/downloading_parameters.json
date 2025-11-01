@@ -1,0 +1,375 @@
+{
+    "installers": {
+        "AMDSoftware": {
+            "description": "Downloading AMD Software Adrenalin Edition:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://www.amd.com/en/support/download/drivers.html', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Download Windows Drivers')",
+            "wait": 60,
+            "size_threshold": 32768
+        },
+        "Avast": {
+            "description": "Downloading Avast:",
+            "steps": [
+                "page.goto('https://www.avast.com/index#pc', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Free download').first",
+            "wait": 60,
+            "size_threshold": 200
+        },
+        "Avast_alt": {
+            "description": "Downloading Avast:",
+            "steps": [
+                "page.goto('https://www.avast.com/index#pc', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Free download').first",
+            "wait": 60,
+            "size_threshold": 630000
+        },
+        "Chrome": {
+            "description": "Downloading Chrome:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://www.google.com/chrome/', timeout=0, wait_until='load')",
+                "page.get_by_role('checkbox').uncheck()"
+            ],
+            "locate_downloadable": "page.locator('[data-test=\"simplified-download-button\"]').get_by_role('button', name='Download Chrome')",
+            "wait": 60,
+            "size_threshold": 10000
+        },
+        "Chrome_alt": {
+            "description": "Downloading Chrome:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://www.google.com/chrome/', timeout=0, wait_until='load')",
+                "page.get_by_role('checkbox', name='Допоможіть покращити Google').uncheck()"
+            ],
+            "locate_downloadable": "page.locator('#js-download-hero')",
+            "wait": 60,
+            "size_threshold": 9000
+        },
+        "CloudflareWARP": {
+            "description": "Downloading Cloudflare WARP:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://one.one.one.one/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Windows').first",
+            "wait": 180,
+            "size_threshold": 120000
+        },
+        "Discord": {
+            "description": "Downloading Discord:",
+            "steps": [
+                "page.goto('https://discord.com/download', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Download for Windows')",
+            "wait": 90,
+            "size_threshold": 109000
+        },
+        "Docker": {
+            "description": "Downloading Docker Desktop:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://docs.docker.com/desktop/setup/install/windows-install/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Docker Desktop for Windows - x86_64', exact=True)",
+            "wait": 240,
+            "size_threshold": 510000
+        },
+        "EAApp": {
+            "description": "Downloading EA App:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://www.ea.com/ea-app', timeout=0, wait_until='load')",
+                "page.get_by_role('link', name='Download the EA app').click()"
+            ],
+            "locate_downloadable": "page.locator('ea-tile').filter(has_text='Windows Windows').locator('#tileLink')",
+            "wait": 60,
+            "size_threshold": 2000
+        },
+        "Firefox": {
+            "description": "Downloading Firefox:",
+            "steps": [
+                "page.goto('https://www.mozilla.org/en-US/firefox/windows/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Download Now')",
+            "wait": 30,
+            "size_threshold": 300
+        },
+        "Git": {
+            "description": "Downloading Git Portable installer",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://git-scm.com/', timeout=0, wait_until='load')",
+                "page.get_by_role('link', name='Download for Windows').click()"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Git for Windows/x64 Portable')",
+            "wait": 180,
+            "size_threshold": 55000
+        },
+        "MSTeams": {
+            "description": "Downloading Microsoft Teams:",
+            "steps": [
+                "page.goto('https://www.microsoft.com/en-us/microsoft-teams/download-app', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('button', name='Download Microsoft Teams for')",
+            "wait": 30,
+            "size_threshold": 1000
+        },
+        "NvidiaApp": {
+            "description": "Downloading NvidiaApp:",
+            "steps": [
+                "page.goto('https://www.nvidia.com/en-eu/software/nvidia-app/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.locator('#container-ffb424fec1').get_by_role('link', name='Download Now')",
+            "wait": 120,
+            "size_threshold": 149000
+        },
+        "PotPlayer": {
+            "description": "Downloading PotPlayer:",
+            "steps": [
+                "page.goto('https://potplayer.daum.net/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='64bit download')",
+            "wait": 90,
+            "size_threshold": 38000
+        },
+        "qBittorrent": {
+            "description": "Downloading fucking qBittorrent:",
+            "headless": 1,
+            "steps": [
+                "page.goto('https://www.fosshub.com/qBittorrent.html', timeout=0, wait_until='load', referer='https://www.qbittorrent.org/download')"
+            ],
+            "locate_downloadable": "page.locator('xpath=/html/body/main/article/section[1]/ul/li[1]/div/dl/div[1]/dd/a')",
+            "wait": 180,
+            "size_threshold": 35840
+        },
+        "RockstarGamesLauncher": {
+            "description": "Downloading Rockstar Games Launcher:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://www.rockstargames.com/newswire/article/89k8a554534523/Download-The-Rockstar-Games-Launcher', timeout=0, wait_until='load')",
+                "page.get_by_test_id('launcherLink').click()"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Rockstar Games Launcher')",
+            "wait": 180,
+            "size_threshold": 130000
+        },
+        "Steam": {
+            "description": "Downloading Steam:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://store.steampowered.com/about/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.locator('#about_greeting').get_by_role('link', name='Install Steam')",
+            "wait": 30,
+            "size_threshold": 2000
+        },
+        "Steam_alt": {
+            "description": "Downloading Steam:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://store.steampowered.com/about/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.locator('#about_greeting').get_by_role('link', name='Інсталювати Steam')",
+            "wait": 30,
+            "size_threshold": 2000
+        },
+        "Telegram": {
+            "description": "Downloading Telegram Desktop:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://desktop.telegram.org/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Get Telegram for Windows x64')",
+            "wait": 60,
+            "size_threshold": 44000
+        },
+        "Telegram_alt": {
+            "description": "Downloading Telegram Desktop:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://desktop.telegram.org/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Завантажити для Windows x64')",
+            "wait": 60,
+            "size_threshold": 44000
+        },
+        "TorBrowser": {
+            "description": "Downloading Tor Browser:",
+            "steps": [
+                "page.goto('https://www.torproject.org/download/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Download for Windows')",
+            "wait": 60,
+            "size_threshold": 106000
+        },
+        "UbisoftConnect": {
+            "description":"Downloading Ubisoft Connect:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://www.ubisoft.com/en-us/', timeout=0, wait_until='load')",
+                "page.get_by_role('button', name='I refuse cookies').click()"
+            ],
+            "locate_downloadable": "page.locator('#global-navigation').get_by_label('Download Ubisoft Connect')",
+            "wait": 120,
+            "size_threshold": 229000
+        },
+        "UbisoftConnect_alt": {
+            "description":"Downloading Ubisoft Connect:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://www.ubisoft.com/en-us/', timeout=0, wait_until='load')",
+                "page.get_by_role('button', name='I refuse cookies').click()",
+                "page.get_by_role('button', name='global navigation').click()"
+            ],
+            "locate_downloadable": "page.locator('#global-navigation div').filter(has_text='UbisoftGamesBrowse By CategoryBrowse By GameUbisoft+Helpexternal-').get_by_label('Download Ubisoft Connect')",
+            "wait": 120,
+            "size_threshold": 229000
+        },
+        "UbisoftConnect_alt2": {
+            "description":"Downloading Ubisoft Connect:",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://www.ubisoft.com/en-us/', timeout=0, wait_until='load')",
+                "page.get_by_role('button', name='Я відмовляюся від використання файлів cookie').click()"
+            ],
+            "locate_downloadable": "page.locator('#global-navigation').get_by_label('Download Ubisoft Connect')",
+            "wait": 120,
+            "size_threshold": 229000
+        },
+        "Viber": {
+            "description": "Downloading Viber Desktop:",
+            "steps": [
+                "page.goto('https://www.viber.com/en/download/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Download for Windows')",
+            "wait": 30,
+            "size_threshold": 2000
+        },
+        "VSCode": {
+            "description": "Downloading VSCode:",
+            "steps": [
+                "page.goto('https://code.visualstudio.com/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('button', name='Download for Windows')",
+            "wait": 90,
+            "size_threshold": 100000
+        },
+        "WDDashboard": {
+            "description": "Downloading Western Digital Dashboard:",
+            "headless": 1,
+            "steps": [
+                "page.goto('https://support-en.sandisk.com/app/products/downloads/softwaredownloads', timeout=0, wait_until='load')",
+                "page.get_by_role('button', name='close icon').click()"
+            ],
+        "locate_downloadable": "page.locator('xpath=//*[@id=\"sandiskTab\"]/div[6]/div[2]/div/div/a')",
+            "wait": 60,
+            "size_threshold": 3000
+        },
+        "WDDashboard_alt": {
+            "description": "Downloading Western Digital Dashboard:",
+            "steps": [
+                "page.goto('https://support-en.sandisk.com/app/products/downloads/softwaredownloads', timeout=0, wait_until='load')",
+                "page.get_by_role('button', name='close icon').click()"
+            ],
+            "locate_downloadable": "page.locator('div:nth-child(9) > div:nth-child(2) > .row > div > .width220')",
+            "wait": 60,
+            "size_threshold": 3000
+        },
+        "WinRARen": {
+            "description": "Downloading WinRAR English:",
+            "steps": [
+                "page.goto('https://www.win-rar.com/download.html', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.locator('#installerlisting').get_by_role('link').filter(has_text=compile(r'^WinRAR [0-9\\.]+ English 64 bit$'))",
+            "wait": 60,
+            "size_threshold": 3500
+        },
+        "WinRARuk": {
+            "description": "Downloading WinRAR Ukrainian:",
+            "steps": [
+                "page.goto('https://www.win-rar.com/download.html', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link').filter(has_text=compile(r'^WinRAR [0-9\\.]+ Ukrainian 64 bit$'))",
+            "wait": 60,
+            "size_threshold": 3500
+        },
+        "Zoom": {
+            "description": "Downloading Zoom Workplace:",
+            "steps": [
+                "page.goto('https://zoom.us/download', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('button', name='Download 64-bit desktop clent')",
+            "wait": 120,
+            "size_threshold": 104000
+        }
+    },
+    "portables": {
+        "AIDA64Extreme": {
+            "description": "Downloading AIDA64 Extreme Portable:",
+            "headless": 1,
+            "steps": [
+                "page.goto('https://www.aida64.com/downloads', timeout=0, wait_until='load')",
+                "page.get_by_role('cell', name='AIDA64 Extreme Trial version, portable ZIP package').get_by_role('link').click()"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='download2.aida64.com (US)')",
+            "wait": 90,
+            "size_threshold": 59000
+        },
+        "AnyDesk": {
+            "description": "Downloading AnyDesk:",
+            "headless": 1,
+            "steps": [
+                "page.goto('https://anydesk.com/en', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.locator('#content').get_by_role('link', name='Download Now')",
+            "wait": 120,
+            "size_threshold": 7400
+        },
+        "BCU": {
+            "description": "Downloading fucking Bulk Crap Uninstaller Portable:",
+            "headless": 1,
+            "steps": [
+                "page.goto('https://www.fosshub.com/Bulk-Crap-Uninstaller.html', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Download BCUninstaller_5.8.3_portable.zip Portable')",
+            "wait": 120,
+            "size_threshold": 142000
+        },
+        "CrystalDiskMark": {
+            "description": "Downloading CrystalDiskMark Portable",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://sourceforge.net/projects/crystaldiskmark/', timeout=0, wait_until='load')",
+                "page.get_by_role('link', name='See All Activity >').click()"
+            ],
+            "locate_downloadable": "page.get_by_role('link').filter(has_text=compile(r'^/[0-9\\.]+/CrystalDiskMark[0-9_]+\\.zip$')).nth(0)",
+            "wait": 180,
+            "size_threshold": 3100
+        },
+        "Rufus": {
+            "description": "Downloading Rufus Portable:",
+            "headless": 1,
+            "steps": [
+                "page.goto('https://rufus.ie/en/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link').filter(has_text=compile(r'^rufus-[0-9\\.]+p\\.exe$'))",
+            "wait": 60,
+            "size_threshold": 1300
+        },
+        "VSCode": {
+            "description": "Downloading VSCode Portable:",
+            "headless": 1,
+            "steps": [
+                "page.goto('https://code.visualstudio.com/download', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Windows ZIP 64-bit x64')",
+            "wait": 120,
+            "size_threshold": 145000
+        }
+    }
+}
