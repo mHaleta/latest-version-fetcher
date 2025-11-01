@@ -72,6 +72,11 @@ async def download_file(key, headless, steps, locate_downloadable, wait, size_th
     download_dir = "temp"
     drive_letter = os.path.splitdrive(os.getcwd())[0]
 
+    # initialize variables referenced in finally/except blocks
+    filename_temp_path = None
+    chromium = None
+    context = None
+
     async with async_playwright() as p:
         try:
             chromium_path = os.path.join(drive_letter, get_chromium_path())
