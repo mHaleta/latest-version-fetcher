@@ -1,1 +1,3 @@
 __pycache__
+data/current_basenames.json
+data/browsers_paths.yaml
