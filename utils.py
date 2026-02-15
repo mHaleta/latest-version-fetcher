@@ -15,7 +15,7 @@ from asyncio import create_task, sleep as asleep
 def random_sleep():
     end = datetime.now() + timedelta(seconds=uniform(10, 20))
     while datetime.now() < end:
-        print(f"Sleeping...  {(end-datetime.now()).total_seconds():.1f} ", end="\r", flush=True)
+        print(f"\nSleeping...  {(end-datetime.now()).total_seconds():.1f} ", end="\r", flush=True)
         sleep(0.1)
     
     print("                        ")
@@ -159,13 +159,16 @@ async def download_file(key, use_adblock, headless, steps, locate_downloadable, 
                 except Exception:
                     pass
 
-            return filename_temp_path
+    return filename_temp_path
 
 
 def move(file_path, target_root_folder, mode, key):
     if os.path.exists(file_path):
-        with open("data\\current_basenames.json", "r", encoding="utf-8") as json:
-            basenames = load(json)
+        if os.path.exists("data\\current_basenames.json"):
+            with open("data\\current_basenames.json", "r", encoding="utf-8") as json:
+                basenames = load(json)
+        else:
+            basenames = {}
         
         current_absname = os.path.join(target_root_folder, basenames.get(mode, {}).get(key, ""))
 
