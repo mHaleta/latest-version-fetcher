@@ -18,7 +18,7 @@ filter_group = parser.add_mutually_exclusive_group(required=False)
 filter_group.add_argument("-l", "--list", nargs="+")
 filter_group.add_argument("-x", "--exclude", nargs="+")
 
-parser.add_argument("--block-ads", action="store_true", type=bool, default=False)
+parser.add_argument("--block-ads", action="store_true")
 
 args = parser.parse_args()
 
