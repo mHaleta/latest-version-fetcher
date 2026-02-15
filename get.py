@@ -18,6 +18,8 @@ filter_group = parser.add_mutually_exclusive_group(required=False)
 filter_group.add_argument("-l", "--list", nargs="+")
 filter_group.add_argument("-x", "--exclude", nargs="+")
 
+parser.add_argument("--block-ads", action="store_true", type=bool, default=False)
+
 args = parser.parse_args()
 
 with ChangeDirectory(project_dir):
@@ -26,7 +28,9 @@ with ChangeDirectory(project_dir):
             parameters = load(json)["installers"]
         else:
             parameters = load(json)["portables"]
+    
 
+    use_adblock = args.block_ads
 
     if args.list:
         missing = set(args.list) - set(parameters.keys())
@@ -51,7 +55,7 @@ with ChangeDirectory(project_dir):
         base_key = compile(r"_alt.*").sub(r"", key)
 
         print(f"\n{description}")
-        filename_temp_path = async_run(download_file(base_key, headless, steps, locate_downloadable, wait, size_threshold))
+        filename_temp_path = async_run(download_file(base_key, use_adblock, headless, steps, locate_downloadable, wait, size_threshold))
 
         if not filename_temp_path:
             print(f"Download failed or file was discarded for {base_key}, skipping move.")
