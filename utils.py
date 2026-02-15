@@ -13,12 +13,13 @@ from asyncio import create_task, sleep as asleep
 
 
 def random_sleep():
+    print("")
     end = datetime.now() + timedelta(seconds=uniform(10, 20))
     while datetime.now() < end:
-        print(f"\nSleeping...  {(end-datetime.now()).total_seconds():.1f} ", end="\r", flush=True)
+        print(f"Sleeping...  {(end-datetime.now()).total_seconds():.1f} ", end="\r", flush=True)
         sleep(0.1)
     
-    print("                        ")
+    print("                        ", end="\r")
 
 
 def get_chromium_path() -> str:

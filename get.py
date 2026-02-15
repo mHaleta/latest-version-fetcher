@@ -73,3 +73,4 @@ with ChangeDirectory(project_dir):
         if i < len(keys) - 1:
             random_sleep()
 
+    print("")
