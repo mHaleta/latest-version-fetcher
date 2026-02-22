@@ -6,7 +6,7 @@
             "steps": [
                 "page.goto('https://www.amd.com/en/support/download/drivers.html', timeout=0, wait_until='load')"
             ],
-            "locate_downloadable": "page.get_by_role('link', name='download - open in a new tab')",
+            "locate_downloadable": "page.get_by_role('link', name='Download Windows Drivers')",
             "wait": 60,
             "size_threshold": 45000
         },
@@ -68,7 +68,17 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='Docker Desktop for Windows - x86_64', exact=True)",
             "wait": 240,
-            "size_threshold": 639000
+            "size_threshold": 600000
+        },
+        "DriverBooster": {
+            "description": "Downloading DriverBooster",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://www.iobit.com/en/driver-booster.php', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Free Download').first",
+            "wait": 90,
+            "size_threshold": 30000
         },
         "EAApp": {
             "description": "Downloading EA App:",
@@ -116,7 +126,7 @@
                 "page.goto('https://www.nvidia.com/en-eu/software/nvidia-app/', timeout=0, wait_until='load')",
                 "page.get_by_role('button', name='Turn Off Optional Cookies').click()"
             ],
-            "locate_downloadable": "page.locator('#container-ffb424fec1').get_by_role('link', name='Download Now')",
+            "locate_downloadable": "page.locator('#nv-button-0c02452789')",
             "wait": 120,
             "size_threshold": 169000
         },
