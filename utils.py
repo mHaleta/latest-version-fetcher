@@ -1,4 +1,5 @@
 import os
+import rarfile
 from datetime import datetime, timedelta
 from time import sleep
 from random import uniform
@@ -199,6 +200,16 @@ def move(file_path, target_root_folder, mode, key):
                     os.remove(file_path)
                 except Exception:
                     print("Error extracting zip:", format_exc())
+                    return
+            elif rarfile.is_rarfile(file_path):
+                rarfile.UNRAR_TOOL = os.path.splitdrive(os.getcwd())[0] + "\\UnRAR.exe"
+
+                try:
+                    with rarfile.RarFile(file_path, "r") as rarf:
+                        rarf.extractall(extract_folder)
+                    os.remove(file_path)
+                except Exception:
+                    print("Error extracting rar:", format_exc())
                     return
             else:
                 os.mkdir(extract_folder)

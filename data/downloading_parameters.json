@@ -143,11 +143,22 @@
             "description": "Downloading fucking qBittorrent:",
             "headless": 0,
             "steps": [
-                "page.goto('https://www.fosshub.com/qBittorrent.html', timeout=0, wait_until='load', referer='https://www.qbittorrent.org/download')"
+                "page.goto('https://sourceforge.net/projects/qbittorrent/', timeout=0, wait_until='load', referer='https://www.qbittorrent.org/download')"
             ],
-            "locate_downloadable": "page.locator('xpath=/html/body/main/article/section[1]/ul/li[1]/div/dl/div[1]/dd/a')",
-            "wait": 180,
-            "size_threshold": 35840
+            "locate_downloadable": "page.get_by_role('link', name='Download', exact=True)",
+            "wait": 240,
+            "size_threshold": 39000
+        },
+        "RiseupVPN": {
+            "description": "Downloading RiseupVPN",
+            "headless": 1,
+            "steps": [
+                "page.goto('https://riseup.net/en/vpn', timeout=0, wait_until='load')",
+                "page.get_by_role('link', name='windows', exact=True).click()"
+            ],
+            "locate_downloadable": "page.get_by_role('link').filter(has_text=compile(r'Download RiseupVPN for windows'))",
+            "wait": 90,
+            "size_threshold": 88000
         },
         "RockstarGamesLauncher": {
             "description": "Downloading Rockstar Games Launcher:",
@@ -300,12 +311,14 @@
             "size_threshold": 7400
         },
         "BCU": {
-            "description": "Downloading fucking Bulk Crap Uninstaller Portable:",
-            "headless": 1,
+            "description": "Downloading Bulk Crap Uninstaller Portable:",
+            "headless": 0,
             "steps": [
-                "page.goto('https://www.fosshub.com/Bulk-Crap-Uninstaller.html', timeout=0, wait_until='load')"
+                "page.goto('https://github.com/Klocman/Bulk-Crap-Uninstaller', timeout=0, wait_until='load')",
+                "page.get_by_role('link', name='GitHub release').click()",
+                "page.get_by_role('button', name='Assets').first.scroll_into_view_if_needed()"
             ],
-            "locate_downloadable": "page.get_by_role('link', name='Download BCUninstaller_5.8.3_portable.zip Portable')",
+            "locate_downloadable": "page.get_by_role('link').filter(has_text=compile(r'BCUninstaller_[0-9\\.]+_portable\\.zip'))",
             "wait": 120,
             "size_threshold": 142000
         },
@@ -319,6 +332,16 @@
             "locate_downloadable": "page.get_by_role('link').filter(has_text=compile(r'^/[0-9\\.]+/CrystalDiskMark[0-9_]+\\.zip$')).nth(0)",
             "wait": 180,
             "size_threshold": 3100
+        },
+        "GenuineVerifier": {
+            "description": "Downloading Windows and Office Genuine ISO Verifier",
+            "headless": 0,
+            "steps": [
+                "page.goto('https://genuine-iso-verifier.weebly.com/', timeout=0, wait_until='load')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='DOWNLOAD')",
+            "wait": 60,
+            "size_threshold": 7500
         },
         "Rufus": {
             "description": "Downloading Rufus Portable:",
