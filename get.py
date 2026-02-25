@@ -65,7 +65,11 @@ with ChangeDirectory(project_dir):
             print(k)
 
             if k.lower() != "y":
-                print("Skipping\n")
+                print("Skipping")
+
+                if i < len(keys) - 1:
+                    print("")
+                
                 continue
 
         filename_temp_path = async_run(download_file(base_key, use_adblock, headless, steps, locate_downloadable, wait, size_threshold))
