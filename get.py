@@ -52,7 +52,7 @@ with ChangeDirectory(project_dir):
         wait = parameters[key]["wait"]
         size_threshold = parameters[key]["size_threshold"]
 
-        base_key = compile(r"_alt.*").sub(r"", key)
+        base_key = regex_compile(r"_alt.*").sub(r"", key)
 
         print(f"\n{description}")
         filename_temp_path = async_run(download_file(base_key, use_adblock, headless, steps, locate_downloadable, wait, size_threshold))

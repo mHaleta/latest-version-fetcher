@@ -1,3 +1,4 @@
-__pycache__
+__pycache__/
 data/current_basenames.json
 data/browsers_paths.yaml
+.vscode/
