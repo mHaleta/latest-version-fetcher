@@ -5,7 +5,7 @@ from time import sleep
 from random import uniform
 from traceback import format_exc
 from yaml import safe_load
-from re import compile
+from re import compile as regex_compile
 from shutil import move as shutil_move, rmtree
 from zipfile import ZipFile, is_zipfile
 from json import load, dump
