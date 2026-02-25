@@ -5,6 +5,7 @@ project_dir = dirname(__file__)
 sys.path.append(project_dir)
 
 from utils import *
+from msvcrt import getch
 from asyncio import run as async_run
 from argparse import ArgumentParser
 
@@ -45,6 +46,7 @@ with ChangeDirectory(project_dir):
 
     for i, key in enumerate(keys):
         description = parameters[key]["description"]
+        vpn = bool(parameters[key].get("vpn", 0))
         
         headless = bool(parameters[key].get("headless", 1))
         steps = parameters[key].get("steps", [])
@@ -55,6 +57,21 @@ with ChangeDirectory(project_dir):
         base_key = regex_compile(r"_alt.*").sub(r"", key)
 
         print(f"\n{description}")
+
+        if vpn:
+            print("Downloading requires VPN turned on. Confirm VPN is turned on [Y/n]: ", end="", flush=True)
+
+            k = getch().decode()
+            print(k)
+
+            if k.lower() != "y":
+                print("Skipping")
+
+                if i < len(keys) - 1:
+                    print("")
+                
+                continue
+
         filename_temp_path = async_run(download_file(base_key, use_adblock, headless, steps, locate_downloadable, wait, size_threshold))
 
         if not filename_temp_path:

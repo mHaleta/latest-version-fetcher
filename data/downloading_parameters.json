@@ -304,6 +304,7 @@
         "AnyDesk": {
             "description": "Downloading AnyDesk:",
             "headless": 0,
+            "vpn": 1,
             "steps": [
                 "page.goto('https://anydesk.com/en', timeout=0, wait_until='load')"
             ],
@@ -337,6 +338,7 @@
         "GenuineVerifier": {
             "description": "Downloading Windows and Office Genuine ISO Verifier",
             "headless": 0,
+            "vpn": 1,
             "steps": [
                 "page.goto('https://genuine-iso-verifier.weebly.com/', timeout=0, wait_until='load')"
             ],
