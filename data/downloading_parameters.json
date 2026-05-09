@@ -17,7 +17,7 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='Free download').first",
             "wait": 60,
-            "size_threshold": 200
+            "size_threshold": 1000
         },
         "Chrome": {
             "description": "Downloading Chrome:",
@@ -48,7 +48,7 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='Download for Windows')",
             "wait": 90,
-            "size_threshold": 119000
+            "size_threshold": 117000
         },
         "Docker": {
             "description": "Downloading Docker Desktop:",
@@ -58,7 +58,7 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='Docker Desktop for Windows - x86_64', exact=True)",
             "wait": 240,
-            "size_threshold": 600000
+            "size_threshold": 625000
         },
         "DriverBooster": {
             "description": "Downloading DriverBooster",
@@ -79,7 +79,7 @@
             ],
             "locate_downloadable": "page.locator('ea-tile').filter(has_text='Windows Windows').locator('#tileLink')",
             "wait": 60,
-            "size_threshold": 2000
+            "size_threshold": 1800
         },
         "Firefox": {
             "description": "Downloading Firefox:",
@@ -88,7 +88,7 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='Download Now')",
             "wait": 30,
-            "size_threshold": 300
+            "size_threshold": 350
         },
         "Git": {
             "description": "Downloading Git Portable installer",
@@ -99,7 +99,7 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='Git for Windows/x64 Portable')",
             "wait": 180,
-            "size_threshold": 55000
+            "size_threshold": 56000
         },
         "MSTeams": {
             "description": "Downloading Microsoft Teams:",
@@ -118,7 +118,7 @@
             ],
             "locate_downloadable": "page.locator('#nv-button-0c02452789')",
             "wait": 120,
-            "size_threshold": 169000
+            "size_threshold": 170000
         },
         "PDFXChangeEditor": {
             "description": "Downloading PDF-XChange Editor:",
@@ -129,7 +129,7 @@
             ],
             "locate_downloadable": "page.get_by_role('button').filter(has_text=regex_compile(r'Download')).first",
             "wait": 120,
-            "size_threshold": 355000
+            "size_threshold": 354000
         },
         "PotPlayer": {
             "description": "Downloading PotPlayer:",
@@ -138,17 +138,19 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='64bit download')",
             "wait": 90,
-            "size_threshold": 45000
+            "size_threshold": 50000
         },
         "qBittorrent": {
             "description": "Downloading fucking qBittorrent:",
             "headless": 0,
+            "channel": "chrome",
             "steps": [
-                "page.goto('https://sourceforge.net/projects/qbittorrent/', timeout=0, wait_until='load', referer='https://www.qbittorrent.org/download')"
+                "page.goto('https://sourceforge.net/projects/qbittorrent/files/qbittorrent-win32/', timeout=0, wait_until='load', referer='https://www.qbittorrent.org/download')",
+                "page.get_by_role('button', name='I DO NOT ACCEPT').click()"
             ],
-            "locate_downloadable": "page.get_by_role('link', name='Download', exact=True)",
+            "locate_downloadable": "page.get_by_role('link', name='Download Latest Version')",
             "wait": 240,
-            "size_threshold": 39000
+            "size_threshold": 41000
         },
         "RiseupVPN": {
             "description": "Downloading RiseupVPN",
@@ -170,7 +172,7 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='Rockstar Games Launcher')",
             "wait": 180,
-            "size_threshold": 125000
+            "size_threshold": 100000
         },
         "Steam": {
             "description": "Downloading Steam:",
@@ -200,7 +202,7 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='Get Telegram for Windows x64')",
             "wait": 60,
-            "size_threshold": 47000
+            "size_threshold": 48000
         },
         "Telegram_alt": {
             "description": "Downloading Telegram Desktop:",
@@ -210,7 +212,7 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='Завантажити для Windows x64')",
             "wait": 60,
-            "size_threshold": 47000
+            "size_threshold": 48000
         },
         "TorBrowser": {
             "description": "Downloading Tor Browser:",
@@ -230,7 +232,7 @@
             ],
             "locate_downloadable": "page.locator('#global-navigation').get_by_label('Download Ubisoft Connect')",
             "wait": 120,
-            "size_threshold": 250000
+            "size_threshold": 254000
         },
         "Viber": {
             "description": "Downloading Viber Desktop:",
@@ -248,7 +250,7 @@
             ],
             "locate_downloadable": "page.get_by_role('button', name='Download for Windows')",
             "wait": 90,
-            "size_threshold": 120000
+            "size_threshold": 150000
         },
         "WDDashboard": {
             "description": "Downloading Western Digital Dashboard:",
@@ -286,7 +288,7 @@
             ],
             "locate_downloadable": "page.get_by_role('button', name='Download 64-bit desktop clent')",
             "wait": 120,
-            "size_threshold": 140000
+            "size_threshold": 145000
         }
     },
     "portables": {

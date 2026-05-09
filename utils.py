@@ -70,7 +70,7 @@ async def block_ads(route, request):
         print("Error in block_ads:", format_exc())
 
 
-async def download_file(key, use_adblock, headless, steps, locate_downloadable, wait, size_threshold):
+async def download_file(key, use_adblock, channel, headless, steps, locate_downloadable, wait, size_threshold):
     download_dir = "temp"
     drive_letter = os.path.splitdrive(os.getcwd())[0]
 
@@ -87,8 +87,12 @@ async def download_file(key, use_adblock, headless, steps, locate_downloadable, 
             
             os.environ["TMP"] = temp_folder
             os.environ["TEMP"] = temp_folder
-        
-            chromium = await p.chromium.launch(executable_path=chromium_path, headless=headless)
+
+            if not channel:
+                chromium = await p.chromium.launch(executable_path=chromium_path, headless=headless)
+            else:
+                chromium = await p.chromium.launch(channel=channel, headless=headless)
+            
             context = await chromium.new_context(accept_downloads=True)
 
             if use_adblock:
