@@ -297,7 +297,7 @@
             "headless": 1,
             "steps": [
                 "page.goto('https://www.aida64.com/downloads', timeout=0, wait_until='load')",
-                "page.get_by_role('cell', name='AIDA64 Extreme Trial version, portable ZIP package').get_by_role('link').click()"
+                "page.get_by_role('link', name='Download').nth(2).click()"
             ],
             "locate_downloadable": "page.get_by_role('link', name='download2.aida64.com (US)')",
             "wait": 90,
@@ -324,11 +324,12 @@
             ],
             "locate_downloadable": "page.get_by_role('link').filter(has_text=regex_compile(r'BCUninstaller_[0-9\\.]+_portable\\.zip'))",
             "wait": 120,
-            "size_threshold": 142000
+            "size_threshold": 76400
         },
         "CrystalDiskMark": {
             "description": "Downloading CrystalDiskMark Portable",
             "headless": 0,
+            "channel": "chrome",
             "steps": [
                 "page.goto('https://sourceforge.net/projects/crystaldiskmark/', timeout=0, wait_until='load')",
                 "page.get_by_role('link', name='See All Activity >').click()"
