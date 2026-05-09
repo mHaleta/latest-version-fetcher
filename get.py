@@ -48,6 +48,7 @@ with ChangeDirectory(project_dir):
         description = parameters[key]["description"]
         vpn = bool(parameters[key].get("vpn", 0))
         
+        channel = parameters[key].get("channel")
         headless = bool(parameters[key].get("headless", 1))
         steps = parameters[key].get("steps", [])
         locate_downloadable = parameters[key]["locate_downloadable"]
@@ -72,7 +73,14 @@ with ChangeDirectory(project_dir):
                 
                 continue
 
-        filename_temp_path = async_run(download_file(base_key, use_adblock, headless, steps, locate_downloadable, wait, size_threshold))
+        filename_temp_path = async_run(download_file(base_key,
+                                                     use_adblock,
+                                                     channel,
+                                                     headless,
+                                                     steps,
+                                                     locate_downloadable,
+                                                     wait,
+                                                     size_threshold))
 
         if not filename_temp_path:
             print(f"Download failed or file was discarded for {base_key}, skipping move.")
