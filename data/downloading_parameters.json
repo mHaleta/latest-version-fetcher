@@ -15,7 +15,7 @@
             "steps": [
                 "page.goto('https://www.avast.com/index#pc', timeout=0, wait_until='load')"
             ],
-            "locate_downloadable": "page.get_by_role('link', name='Free download').first",
+            "locate_downloadable": "page.locator('#button-4577c20375')",
             "wait": 60,
             "size_threshold": 1000
         },
@@ -58,7 +58,7 @@
             ],
             "locate_downloadable": "page.get_by_role('link', name='Docker Desktop for Windows - x86_64', exact=True)",
             "wait": 240,
-            "size_threshold": 625000
+            "size_threshold": 620000
         },
         "DriverBooster": {
             "description": "Downloading DriverBooster",
@@ -114,7 +114,7 @@
             "description": "Downloading NvidiaApp:",
             "steps": [
                 "page.goto('https://www.nvidia.com/en-eu/software/nvidia-app/', timeout=0, wait_until='load')",
-                "page.get_by_role('button', name='Turn Off Optional Cookies').click()"
+                "page.get_by_role('button', name='Reject Optional').click()"
             ],
             "locate_downloadable": "page.locator('#nv-button-0c02452789')",
             "wait": 120,
@@ -136,11 +136,22 @@
             "steps": [
                 "page.goto('https://potplayer.tv/', timeout=0, wait_until='load')"
             ],
-            "locate_downloadable": "page.get_by_role('link', name='64bit download')",
+            "locate_downloadable": "page.get_by_role('link', name='DOWNLOAD x64 (64bit)')",
             "wait": 90,
-            "size_threshold": 50000
+            "size_threshold": 45000
         },
         "qBittorrent": {
+            "description": "Downloading fucking qBittorrent:",
+            "headless": 0,
+            "channel": "chrome",
+            "steps": [
+                "page.goto('https://sourceforge.net/projects/qbittorrent/files/qbittorrent-win32/', timeout=0, wait_until='load', referer='https://www.qbittorrent.org/download')"
+            ],
+            "locate_downloadable": "page.get_by_role('link', name='Download Latest Version')",
+            "wait": 240,
+            "size_threshold": 39000
+        },
+        "qBittorrent_alt": {
             "description": "Downloading fucking qBittorrent:",
             "headless": 0,
             "channel": "chrome",
@@ -217,9 +228,10 @@
         "TorBrowser": {
             "description": "Downloading Tor Browser:",
             "steps": [
-                "page.goto('https://www.torproject.org/download/', timeout=0, wait_until='load')"
+                "page.goto('https://www.torproject.org/download/', timeout=0, wait_until='load')",
+                "page.get_by_role('link', name='Get it for Desktop').click()"
             ],
-            "locate_downloadable": "page.get_by_role('link', name='Download for Windows')",
+            "locate_downloadable": "page.get_by_role('link', name='Windows', exact=True)",
             "wait": 60,
             "size_threshold": 108000
         },
@@ -255,6 +267,7 @@
         "WDDashboard": {
             "description": "Downloading Western Digital Dashboard:",
             "headless": 1,
+            "channel": "chrome",
             "steps": [
                 "page.goto('https://support-en.sandisk.com/app/products/downloads/softwaredownloads', timeout=0, wait_until='load')",
                 "page.get_by_role('button', name='Reject All Non-Essential').click()"
@@ -322,7 +335,7 @@
                 "page.get_by_role('link', name='GitHub release').click()",
                 "page.get_by_role('button', name='Assets').first.scroll_into_view_if_needed()"
             ],
-            "locate_downloadable": "page.get_by_role('link').filter(has_text=regex_compile(r'BCUninstaller_[0-9\\.]+_portable\\.zip'))",
+            "locate_downloadable": "page.get_by_role('link').filter(has_text=regex_compile(r'BCUninstaller_[0-9\\.]+_portable\\.(zip|7z)'))",
             "wait": 120,
             "size_threshold": 76400
         },
@@ -341,13 +354,13 @@
         "GenuineVerifier": {
             "description": "Downloading Windows and Office Genuine ISO Verifier",
             "headless": 0,
-            "vpn": 1,
+            "channel": "chrome",
             "steps": [
-                "page.goto('https://genuine-iso-verifier.weebly.com/', timeout=0, wait_until='load')"
+                "page.goto('https://sites.google.com/view/windows-genuine-iso-verifier/home', timeout=0, wait_until='load')"
             ],
             "locate_downloadable": "page.get_by_role('link', name='DOWNLOAD')",
             "wait": 60,
-            "size_threshold": 7500
+            "size_threshold": 14000
         },
         "Rufus": {
             "description": "Downloading Rufus Portable:",
@@ -363,11 +376,12 @@
             "description": "Downloading VSCode Portable:",
             "headless": 1,
             "steps": [
-                "page.goto('https://code.visualstudio.com/download', timeout=0, wait_until='load')"
+                "page.goto('https://code.visualstudio.com/download', timeout=0, wait_until='load')",
+                "page.locator('#other-downloads-win-toggle').click()"
             ],
-            "locate_downloadable": "page.get_by_role('link', name='Windows ZIP 64-bit x64')",
+            "locate_downloadable": "page.get_by_role('menuitem', name='.zip (x64)')",
             "wait": 120,
-            "size_threshold": 145000
+            "size_threshold": 340000
         }
     }
 }

@@ -1,5 +1,6 @@
 import os
 import rarfile
+import subprocess
 from datetime import datetime, timedelta
 from time import sleep
 from random import uniform
@@ -214,6 +215,31 @@ def move(file_path, target_root_folder, mode, key):
                     os.remove(file_path)
                 except Exception:
                     print("Error extracting rar:", format_exc())
+                    return
+            elif file_path.lower().endswith(".7z"):
+                # Path to the portable 7-Zip command-line executable
+                seven_zip = os.path.splitdrive(os.getcwd())[0] + "\\7z2604-extra\\x64\\7za.exe"
+
+                try:
+                    os.makedirs(extract_folder, exist_ok=True)
+
+                    subprocess.run(
+                        [
+                            seven_zip,
+                            "x",
+                            os.path.abspath(file_path),
+                            f"-o{os.path.abspath(extract_folder)}",
+                            "-y",
+                        ],
+                        check=True,
+                        capture_output=True,
+                        text=True,
+                    )
+
+                    os.remove(file_path)
+
+                except Exception:
+                    print("Error extracting 7z:", format_exc())
                     return
             else:
                 os.mkdir(extract_folder)
